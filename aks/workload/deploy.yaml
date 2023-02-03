@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wasm-spin
 spec:
-  replicas: 4
+  replicas: 50
   selector:
     matchLabels:
       app: wasm-spin
@@ -17,6 +17,13 @@ spec:
         - name: spin-app
           image: ghcr.io/deislabs/containerd-wasm-shims/examples/spin-rust-hello:latest
           command: ["/"]
+          resources:
+            requests:
+              cpu: 1m
+              memory: 1Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
